@@ -26,7 +26,7 @@ void filterGaussian(){
 	Mat inputImage, outputImage, inputImage2;
 
 	//画像の読み込み
-	inputImage = imread("lena.jpg");
+	inputImage = imread("webcam8.jpg");
 
 	//RGB画像をグレースケールに変換
 	GaussianBlur(inputImage, outputImage, Size(11,11), 10, 10);
@@ -44,7 +44,7 @@ void filterBilateral(){
 	Mat inputImage, outputImage, inputImage2;
 
 	//画像の読み込み
-	inputImage = imread("lena.jpg");
+	inputImage = imread("webcam8.jpg");
 
 	//RGB画像をグレースケールに変換
 	bilateralFilter(inputImage, outputImage, 20, 90 ,400);
@@ -62,10 +62,10 @@ void filterMedian(){
 	Mat inputImage, outputImage, inputImage2;
 
 	//画像の読み込み
-	inputImage = imread("lena.jpg");
+	inputImage = imread("webcam8.jpg");
 
 	//RGB画像をグレースケールに変換
-	medianBlur(inputImage, outputImage, 51);
+	medianBlur(inputImage, outputImage, 21);
 
 	//画像の表示
 	imshow("median",outputImage);
