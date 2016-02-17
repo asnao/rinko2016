@@ -26,10 +26,10 @@ void filterGaussian(){
 	Mat inputImage, outputImage, inputImage2;
 
 	//画像の読み込み
-	inputImage = imread("webcam8.jpg");
+	inputImage = imread("ISOnoise.jpg");
 
 	//RGB画像をグレースケールに変換
-	GaussianBlur(inputImage, outputImage, Size(11,11), 10, 10);
+	GaussianBlur(inputImage, outputImage, Size(0,0), 6, 6);
 
 	//画像の表示
 	imshow("gaussian",outputImage);
@@ -44,10 +44,10 @@ void filterBilateral(){
 	Mat inputImage, outputImage, inputImage2;
 
 	//画像の読み込み
-	inputImage = imread("webcam8.jpg");
+	inputImage = imread("ISOnoise.jpg");
 
 	//RGB画像をグレースケールに変換
-	bilateralFilter(inputImage, outputImage, 20, 90 ,400);
+	bilateralFilter(inputImage, outputImage, 6, 50 ,400);
 
 	//画像の表示
 	imshow("bilateral",outputImage);

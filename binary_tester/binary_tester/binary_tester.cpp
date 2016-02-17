@@ -13,17 +13,17 @@ cv::Scalar randomColor()
 
 int main(){
 
-	const char th = 20;
+	//const char th = 20;
+	const char th = 57;
 	//MatŒ^•Ï”‚ÌéŒ¾
 	Mat inImg, bgImg, diffClrImg, diffGryImg, biBgImg, outImg;
 	//‰æ‘œ‚Ì“Ç‚İ‚İ
-	inImg = imread("input2.jpg");
-	bgImg = imread("background2.jpg");
+	inImg = imread("input6.jpg");
+	bgImg = imread("background6.jpg");
 
 	imshow("in", inImg);
 	imshow("bg", bgImg);
 	waitKey(10);
-
 
 
 	absdiff(inImg,bgImg,diffClrImg);//”wŒi‰æ‘œ‚Æ‚Ì·•ª‚ğæ“¾
@@ -32,9 +32,31 @@ int main(){
 	
 		
 	biBgImg = ~biBgImg;
-	cv::dilate(biBgImg, biBgImg, cv::Mat(), cv::Point(-1,-1), 10);
-	cv::erode(biBgImg, biBgImg, cv::Mat(), cv::Point(-1,-1), 10);
+//	cv::dilate(biBgImg, biBgImg, cv::Mat(), cv::Point(-1,-1), 1);
+//	cv::erode(biBgImg, biBgImg, cv::Mat(), cv::Point(-1,-1), 1);
+	cv::imwrite("input0.jpg", biBgImg);	
+
+
+	waitKey(10);
+
+	cv::dilate(biBgImg, biBgImg, cv::Mat(), cv::Point(-1,-1), 2);
+	cv::imwrite("afeterdilate1.jpg", biBgImg);
+	waitKey(10);
+	cv::erode(biBgImg, biBgImg, cv::Mat(), cv::Point(-1,-1), 2);
+	cv::imwrite("aftererode2.jpg", biBgImg);
+	waitKey(10);
+
+	cv::erode(biBgImg, biBgImg, cv::Mat(), cv::Point(-1,-1), 2);
+	cv::imwrite("aftererode3.jpg", biBgImg);
+	waitKey(10);
+	cv::dilate(biBgImg, biBgImg, cv::Mat(), cv::Point(-1,-1), 2);
+	cv::imwrite("afeterdilate4.jpg", biBgImg);
+	waitKey(10);
 	
+
+
+
+
 	biBgImg = ~biBgImg;
 
 	Mat bi3BgImg(inImg.rows,inImg.cols, CV_8UC3);

@@ -7,13 +7,13 @@ using namespace cv;
 void edgeDiff();
 void edgeSobel();
 void edgeLaplacian();
-
+void edgeLOG2();
+void edgeLaplacian2();
 
 int main(){
 
-	edgeDiff();
-	edgeSobel();
-	edgeLaplacian();
+	edgeLOG2();
+	edgeLaplacian2();
 
 	//OpenCVの関数．何かしらのボタンの入力があるまで，プログラムを止める．
 	waitKey(0);
@@ -117,11 +117,55 @@ void edgeLaplacian(){
 
 }
 */
+
+void edgeLOG2(){
+	Mat src, gray, dst, abs_dst;
+
+
+    src = imread( "input2.jpg" );
+
+    /// Remove noise by blurring with a Gaussian filter
+    GaussianBlur( src, src, Size(3,3), 1, 1, BORDER_DEFAULT );
+	
+	cvtColor( src, gray, CV_RGB2GRAY );
+
+    /// Apply Laplace function
+    Laplacian( gray, dst, CV_16SC1, 3, 1, 0, BORDER_DEFAULT );
+
+	convertScaleAbs(dst, abs_dst );
+
+    imshow( "resultlog", abs_dst );
+	imwrite("result_log.jpg",abs_dst);
+ 
+    waitKey(0);
+}
+
+void edgeLaplacian2(){
+	Mat src, gray, dst, abs_dst;
+
+    src = imread( "input2.jpg" );
+
+    /// Remove noise by blurring with a Gaussian filter
+//    GaussianBlur( src, src, Size(7,7), 3, 3, BORDER_DEFAULT );
+	
+	cvtColor( src, gray, CV_RGB2GRAY );
+
+    /// Apply Laplace function
+    Laplacian( gray, dst, CV_16SC1, 3, 1, 0, BORDER_DEFAULT );
+
+	convertScaleAbs(dst, abs_dst );
+
+    imshow( "resultlap", abs_dst );
+	imwrite("result_lap.jpg",abs_dst);
+ 
+    waitKey(0);
+}
+
 void edgeLaplacian(){
 	Mat src, gray, dst, abs_dst;
 
 
-    src = imread( "lena.jpg" );
+    src = imread( "input.jpg" );
 
     /// Remove noise by blurring with a Gaussian filter
     GaussianBlur( src, src, Size(7,7), 3, 3, BORDER_DEFAULT );
@@ -130,6 +174,7 @@ void edgeLaplacian(){
 
     /// Apply Laplace function
     Laplacian( gray, dst, CV_16SC1, 3, 1, 0, BORDER_DEFAULT );
+
 	Mat zeroCross(dst.rows, dst.cols, CV_16SC1);
 	for(int y = 1; y < dst.rows - 1; y++){
 		for(int x = 1; x < dst.cols - 1; x++){
